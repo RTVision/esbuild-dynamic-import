@@ -6,7 +6,7 @@ import { Plugin } from 'esbuild';
 export interface DynamicImportConfig {
 	transformExtensions?: string[],
 	changeRelativeToAbsolute?: boolean,
-	filter: RegExp
+	filter?: RegExp
 }
 
 export default function (config : DynamicImportConfig) : Plugin {
