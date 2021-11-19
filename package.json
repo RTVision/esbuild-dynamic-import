@@ -5,7 +5,7 @@
   "author": "Kalvens (@kalvenschraut)",
   "bugs": "https://github.com/RtVision/esbuild-dynamic-imports/issues",
   "scripts": {
-    "prepublish": "tsc"
+    "prepare": "tsc"
   },
   "peerDependencies": {
     "esbuild": "^0.13.14"
