@@ -55,4 +55,4 @@ DynamicImport({ transformExtensions: ['.vue'], changeRelativeToAbsolute: true, f
    js file that is not marked as external
 
 ## License
-MIT © Kalven Schraut                                                                                              
+MIT © RtVision

@@ -39,7 +39,8 @@
   ],
   "homepage": "https://github.com/RtVision/mocha-esbuild",
   "keywords": [
-    "oclif"
+    "esbuild",
+    "dynamic import"
   ],
   "license": "MIT",
   "main": "lib/index.js",
