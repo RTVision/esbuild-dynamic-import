@@ -1,7 +1,7 @@
 {
   "name": "esbuild-dynamic-import",
   "description": "Plugin for transform dynamic imports in esbuild",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Kalvens (@kalvenschraut)",
   "bugs": "https://github.com/RtVision/esbuild-dynamic-imports/issues",
   "scripts": {
