@@ -3,12 +3,20 @@ import Path from 'path';
 import FastGlob from 'fast-glob';
 import { Plugin } from 'esbuild';
 
-export default function () : Plugin {
-	const filter = /\.js$/;
+export interface DynamicImportConfig {
+	transformExtensions?: string[],
+	changeRelativeToAbsolute?: boolean,
+	filter: RegExp
+}
+
+export default function (config : DynamicImportConfig) : Plugin {
+	if (!Array.isArray(config.transformExtensions) && !config.changeRelativeToAbsolute) {
+		throw new Error('Either transformExtensions needs to be supplied or changeRelativeToAbsolute needs to be true');
+	}
+	const filter = config.filter ?? /\.js$/;
 	return {
 		name: 'rtvision:dynamic-import',
 		setup (build) {
-			const transformExtensions = ['.vue'];
 			const cache = new Map();
 
 			build.onLoad({ filter }, async args => {
@@ -16,8 +24,9 @@ export default function () : Plugin {
 				const fileContents = await FsPromise.readFile(args.path, 'utf8');
 				let value = cache.get(args.path);
 
+				// cache busting check
 				if (!value || value.fileContents !== fileContents) {
-					const contents = await replaceImports(fileContents, resolveDir, transformExtensions);
+					const contents = await replaceImports(fileContents, resolveDir, config);
 					value = { fileContents, output: { contents } };
 					cache.set(args.path, value);
 				}
@@ -27,7 +36,7 @@ export default function () : Plugin {
 	};
 }
 
-async function replaceImports (fileContents: string, resolveDir: string, transformExtensions: string[]) {
+async function replaceImports (fileContents: string, resolveDir: string, config: DynamicImportConfig) {
 	const matches = fileContents.matchAll(/import\(([^)]+)\)/g);
 
 	const globImports = [];
@@ -39,10 +48,10 @@ async function replaceImports (fileContents: string, resolveDir: string, transfo
 		// only change relative files if js file, then we can keep it a normal dynamic import
 		// let node dynamically import the files. Support browser dynamic import someday?
 		const fileExtension = Path.extname(destinationFile);
-		if (!Path.isAbsolute(destinationFile) && fileExtension === '.js') {
+		if (config.changeRelativeToAbsolute && !Path.isAbsolute(destinationFile) && fileExtension === '.js') {
 			const normalizedPath = Path.normalize(`${resolveDir}/${destinationFile}`);
 			fileContents = fileContents.replace(match[1], `\`${normalizedPath}\``);
-		} else if (transformExtensions.includes(fileExtension) && /^.*\${.*?}.*$/.test(destinationFile)) {
+		} else if (Array.isArray(config.transformExtensions) && config.transformExtensions.includes(fileExtension) && /^.*\${.*?}.*$/.test(destinationFile)) {
 			importsToReplace.push({ fullImport: match[0], pathString: `\`${destinationFile}\`` });
 			const transformedDestination = destinationFile.replace(/\${.*?}/g, '**/*');
 			globImports.push(transformedDestination);
