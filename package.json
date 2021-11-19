@@ -1,0 +1,43 @@
+{
+  "name": "esbuild-dynamic-imports",
+  "description": "Transform dynamic imports",
+  "version": "0.0.0",
+  "author": "Kalvens (@kalvenschraut)",
+  "bugs": "https://github.com/RtVision/esbuild-dynamic-imports/issues",
+  "peerDependencies": {
+    "esbuild": "^0.13.14"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.7"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.11.8",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "chai": "^4.3.4",
+    "eslint": "^8.2.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0",
+    "typescript": "^4.5.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/lib"
+  ],
+  "homepage": "https://github.com/RtVision/mocha-esbuild",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "repository": "RtVision/esbuild-dynamic-import",
+  "types": "lib/index.d.ts"
+}
