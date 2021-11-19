@@ -37,7 +37,6 @@
   "files": [
     "/lib"
   ],
-  "homepage": "https://github.com/RtVision/mocha-esbuild",
   "keywords": [
     "esbuild",
     "dynamic import"
