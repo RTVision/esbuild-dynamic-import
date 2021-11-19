@@ -42,7 +42,7 @@ DynamicImport({ transformExtensions: ['.vue'], changeRelativeToAbsolute: true, f
    If there exists a dynamic import like `import(``../../$file}.js``)`
    then that in theory could be resolved at runtime just fine by nodejs. The main
    issue is that the relative file path is now different due to the bundled file produced by
-   esbuild being in likely different file location. changeRelativeToAbsolute will fix this issue
+   esbuild being in a likely different file location. changeRelativeToAbsolute will fix this issue
    by changing all relative dynamic imports that contain a template literal variable to absolute ones.
 
    For my use case dynamic imports while using vite are needed to be relative for production builds
