@@ -3,7 +3,7 @@ Esbuild Dynamic Import
 
 
 [![Version](https://img.shields.io/npm/v/mocha-esbuild.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
-[![Downloads/week](https://img.shields.io/npm/dw/mocha-esbuild.svg)](https://npmjs.org/package/@rtvision/esbuilt-dynamic-import)
+[![Downloads/week](https://img.shields.io/npm/dw/mocha-esbuild.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
 [![License](https://img.shields.io/npm/l/mocha-esbuild.svg)](https://github.com/RtVision/esbuild-dynamic-import/blob/master/package.json)
 
 ### Features
