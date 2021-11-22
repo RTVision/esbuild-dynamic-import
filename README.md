@@ -2,9 +2,9 @@ Esbuild Dynamic Import
 =============
 
 
-[![Version](https://img.shields.io/npm/v/mocha-esbuild.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
-[![Downloads/week](https://img.shields.io/npm/dw/mocha-esbuild.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
-[![License](https://img.shields.io/npm/l/mocha-esbuild.svg)](https://github.com/RtVision/esbuild-dynamic-import/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/@rtvision/esbuild-dynamic-import.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
+[![Downloads/week](https://img.shields.io/npm/dw/@rtvision/esbuild-dynamic-import.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
+[![License](https://img.shields.io/npm/l/@rtvision/esbuild-dynamic-import.svg)](https://github.com/RtVision/esbuild-dynamic-import/blob/master/package.json)
 
 ### Features
 -Transforms dynamic imports that contain a template string variable into static imports to be processed by esbuild
