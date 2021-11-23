@@ -51,7 +51,7 @@ DynamicImport({ transformExtensions: ['.vue'], changeRelativeToAbsolute: true, f
   ### Filter
    The Filter parameter is used to reduce the scope of the file search.
 
-   I set it to just our local source directory, but by default it will search through every
+   I set it to just search our local source directory, but by default it will search through every
    js file that is not marked as external
 
 ## License
