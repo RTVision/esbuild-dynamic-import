@@ -6,7 +6,8 @@ import { Plugin } from 'esbuild';
 export interface DynamicImportConfig {
 	transformExtensions?: string[],
 	changeRelativeToAbsolute?: boolean,
-	filter?: RegExp
+	filter?: RegExp,
+	loader?: string
 }
 
 export default function (config : DynamicImportConfig) : Plugin {
@@ -14,6 +15,7 @@ export default function (config : DynamicImportConfig) : Plugin {
 		throw new Error('Either transformExtensions needs to be supplied or changeRelativeToAbsolute needs to be true');
 	}
 	const filter = config.filter ?? /\.js$/;
+	const loader = config.loader ?? 'js';
 	return {
 		name: 'rtvision:dynamic-import',
 		setup (build) {
@@ -27,7 +29,7 @@ export default function (config : DynamicImportConfig) : Plugin {
 				// cache busting check
 				if (!value || value.fileContents !== fileContents) {
 					const contents = await replaceImports(fileContents, resolveDir, config);
-					value = { fileContents, output: { contents } };
+					value = { fileContents, output: { contents, loader } };
 					cache.set(args.path, value);
 				}
 				return value.output;

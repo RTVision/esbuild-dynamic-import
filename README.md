@@ -1,17 +1,17 @@
-Esbuild Dynamic Import
-=============
-
+# Esbuild Dynamic Import
 
 [![Version](https://img.shields.io/npm/v/@rtvision/esbuild-dynamic-import.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
 [![Downloads/week](https://img.shields.io/npm/dw/@rtvision/esbuild-dynamic-import.svg)](https://npmjs.org/package/@rtvision/esbuild-dynamic-import)
 [![License](https://img.shields.io/npm/l/@rtvision/esbuild-dynamic-import.svg)](https://github.com/RtVision/esbuild-dynamic-import/blob/master/package.json)
 
 ### Features
+
 -Transforms dynamic imports that contain a template string variable into static imports to be processed by esbuild
 
 -Rewrites dynamic imports of js files that contain a template string variable to use absolute path instead
-                                                                                       
+
 ## Install
+
 ```sh
 npm i @rtvision/esbuild-dynamic-import
 ```
@@ -28,31 +28,40 @@ DynamicImport({ transformExtensions: ['.vue'], changeRelativeToAbsolute: true, f
 
 ## Parameters
 
-  ### transformExtensions
-   Transforms all dynamic imports that contain a template varable and the imported file extension
-   is included in transformExtensions. I.E. `import(``../../${file}.vue``)`
-   All imports found will be turned into static imports of every possible valid import it could be.
-   It then uses the static imports instead of node dynamically importing the file at runtime
+### transformExtensions
 
-   My use case for this was I wanted esbuild to process the possible imports that are
-   .vue (SFC vue) files so they can be processed by the EsbuildVue plugin and made into
-   valid javascript that nodejs can run.
-  
-  ### changeRelativeToAbsolute
-   If there exists a dynamic import like `import(``../../${file}.js``)`
-   then that in theory could be resolved at runtime just fine by nodejs. The main
-   issue is that the relative file path is now different due to the bundled file produced by
-   esbuild being in a likely different file location. changeRelativeToAbsolute will fix this issue
-   by changing all relative dynamic imports that contain a template literal variable to absolute ones.
+Transforms all dynamic imports that contain a template varable and the imported file extension
+is included in transformExtensions. I.E. ` import(``../../${file}.vue``) `
+All imports found will be turned into static imports of every possible valid import it could be.
+It then uses the static imports instead of node dynamically importing the file at runtime
 
-   For my use case dynamic imports while using vite are needed to be relative for production builds
-   especially since Rollup is currently used and Rollup requires all dynamic imports to be relative.
-  
-  ### Filter
-   The Filter parameter is used to reduce the scope of the file search.
+My use case for this was I wanted esbuild to process the possible imports that are
+.vue (SFC vue) files so they can be processed by the EsbuildVue plugin and made into
+valid javascript that nodejs can run.
 
-   I set it to just search our local source directory, but by default it will search through every
-   js file that is not marked as external
+### changeRelativeToAbsolute
+
+If there exists a dynamic import like ` import(``../../${file}.js``) `
+then that in theory could be resolved at runtime just fine by nodejs. The main
+issue is that the relative file path is now different due to the bundled file produced by
+esbuild being in a likely different file location. changeRelativeToAbsolute will fix this issue
+by changing all relative dynamic imports that contain a template literal variable to absolute ones.
+
+For my use case dynamic imports while using vite are needed to be relative for production builds
+especially since Rollup is currently used and Rollup requires all dynamic imports to be relative.
+
+### Filter
+
+The Filter parameter is used to reduce the scope of the file search.
+
+I set it to just search our local source directory, but by default it will search through every
+js file that is not marked as external
+
+### Loader
+
+Need to specify if you need one of esbuild's internal loaders to transform the file after
+the dynamic imports are handled by this plugin. i.e. if your filter is /\.jsx$/ then you need to specify jsx as your loader
 
 ## License
+
 MIT © RtVision
