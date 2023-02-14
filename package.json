@@ -1,34 +1,39 @@
 {
   "name": "@rtvision/esbuild-dynamic-import",
   "description": "Plugin for transform dynamic imports in esbuild",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "author": "Kalvens (@kalvenschraut)",
   "bugs": "https://github.com/RtVision/esbuild-dynamic-imports/issues",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
   "scripts": {
-    "prepare": "tsc"
+    "prepare": "tsup src/index.ts --format=cjs,esm --dts"
   },
   "peerDependencies": {
-    "esbuild": "^0.13.14"
+    "esbuild": "0.x.x"
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.1",
-    "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
-    "chai": "^4.3.6",
-    "esbuild": "^0.14.45",
+    "esbuild": "^0.17.8",
     "eslint": "^8.17.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "mocha": "^10.0.0",
-    "nyc": "^15.1.0",
+    "tsup": "^6.6.2",
     "typescript": "^4.7.3"
   },
   "engines": {
@@ -42,7 +47,5 @@
     "dynamic import"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "repository": "RtVision/esbuild-dynamic-import",
-  "types": "lib/index.d.ts"
+  "repository": "RtVision/esbuild-dynamic-import"
 }
