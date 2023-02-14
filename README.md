@@ -22,7 +22,6 @@ I know this was working using the version 0.13.14 of esbuild. It may work for ea
 
 ```js
 import DynamicImport from '@rtvision/esbuild-dynamic-import';
-// note depending on your setup you may need to do DynamicImport.default() instead
 DynamicImport({ transformExtensions: ['.vue'], changeRelativeToAbsolute: true, filter: /src\/.*\.js$/ }),
 ```
 
