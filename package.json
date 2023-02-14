@@ -40,7 +40,7 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "/lib"
+    "/dist"
   ],
   "keywords": [
     "esbuild",
