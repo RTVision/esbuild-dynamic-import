@@ -91,7 +91,7 @@ async function replaceImports (fileContents: string, resolveDir: string, config:
 
 		const importString = dedupedImportFilePaths.reduce((accum, path, i) => {
 			if (accum !== '') accum += '\n';
-			return `${accum}import _DynamicImportModule${i} from '${path}';`;
+			return `${accum}import * as _DynamicImportModule${i} from '${path}';`;
 		}, '');
 
 		let objectMapString = 'const _DynamicImportModuleMap = {';
