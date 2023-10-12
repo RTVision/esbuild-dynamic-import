@@ -72,6 +72,17 @@ async function replaceImports (fileContents: string, resolveDir: string, config:
 		} catch (e) {
 			console.error(e);
 		}
+
+		// For all files ending in '.js', also allow importing without the extension
+		const jsImportFilePaths = importFilePaths.filter(filePath => {
+			return /\.js$/.test(filePath);
+		});
+		importFilePaths = importFilePaths.concat(
+			jsImportFilePaths.map(jsFilePath => {
+				return jsFilePath.replace(/\.js$/, '');
+			})
+		);
+
 		if (importFilePaths.length === 0) {
 			return fileContents;
 		}
