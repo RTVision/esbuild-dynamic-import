@@ -44,8 +44,23 @@ async function replaceImports (fileContents: string, resolveDir: string, config:
 	const globImports = [];
 	const importsToReplace = [];
 	for (const match of matches) {
-		// remove any comments and the ` characters not handling multiline comments very well
-		const destinationFile = match[1]?.replace(/(?:\/\*.*?\*\/)|(?:\/\/.*\n)|`/g, '').trim();
+		// remove any comments, not handling multiline comments very well
+		let destinationFile = match[1]?.replace(/(?:\/\*.*?\*\/)|(?:\/\/.*\n)/g, '').trim();
+
+		// simple string concatenations become template strings
+		if (destinationFile.trim()[0] !== '`') {
+			destinationFile = destinationFile.replaceAll(/(["']\s*\+\s*)([^"'\s])/g, '${$2')// str+var
+				.replaceAll(/([^"'\s])(\s*\+\s*["'])/g, '$1}')// var+str
+				.replaceAll(/([^"'\s])(\s*\+\s*)([^"'\s])/g, '$1}${$3')// var+var
+				.replaceAll(/["']\s*\+\s*["']/g, '')// str+str
+				.replaceAll(/()(^[^"'])/g, '`${$2')// begin var
+				.replaceAll(/^["']/g, '`')// begin str
+				.replaceAll(/([^"'])()$/g, '$1}`')// end var
+				.replaceAll(/["']$/g, '`');// end str
+		}
+
+		// remove the ` characters
+		destinationFile = destinationFile.replace(/`/g, '').trim();
 
 		// only change relative files if js file, then we can keep it a normal dynamic import
 		// let node dynamically import the files. Support browser dynamic import someday?
